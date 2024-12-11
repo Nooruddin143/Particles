@@ -1,4 +1,8 @@
 #include "Particle.h"
+
+//constructor generates random shape from matrix, with randomly positive or negative velocity
+//color1 white, color2 random value for each RGB value
+//loop to create particle angles
 Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition):m_A(2, numPoints)
 {
     m_ttl = TTL;
@@ -42,6 +46,7 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
     }
 }
 
+//draw particle with triangle fan type
 void Particle::draw(RenderTarget& target, RenderStates states) const
 {
     VertexArray lines(TriangleFan, m_numPoints + 1);
@@ -58,6 +63,7 @@ void Particle::draw(RenderTarget& target, RenderStates states) const
     target.draw(lines);
 }
 
+//shrink, rotate, translate particle
 void Particle::update(float dt)
 {
     m_ttl -= dt;
@@ -214,6 +220,7 @@ void Particle::unitTests()
     cout << "Score: " << score << " / 7" << endl;
 }
 
+//use rotation matrix and translate function to rotate particle by theta
 void Particle::rotate(double theta)
 {
     Vector2f temp = m_centerCoordinate;
@@ -223,6 +230,7 @@ void Particle::rotate(double theta)
     translate(temp.x, temp.y);
 }
 
+//use scaling matrix and translate function to scale by c
 void Particle::scale(double c)
 {
     Vector2f temp = m_centerCoordinate;
@@ -232,6 +240,7 @@ void Particle::scale(double c)
     translate(temp.x, temp.y);
 }
 
+//use translation matrix to shift coordinate by specific x and y amounts
 void Particle::translate(double xShift, double yShift)
 {
     TranslationMatrix T(xShift, yShift, m_A.getCols());
