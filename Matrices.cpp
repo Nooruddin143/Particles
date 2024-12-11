@@ -91,6 +91,7 @@ namespace Matrices
         return os;
     }
 
+    //create 2x2 matrix and assign to cos/sin of angle
     RotationMatrix::RotationMatrix(double theta) : Matrix(2, 2)
     {
         a.at(0).at(0) = cos(theta);
@@ -98,7 +99,8 @@ namespace Matrices
         a.at(1).at(0) = sin(theta);
         a.at(1).at(1) = cos(theta);
     }
-    
+
+    //create 2x2 matrix to change element [0, 0] and [1, 1] to given scale
     ScalingMatrix::ScalingMatrix(double scale) : Matrix(2, 2)
     {
         a.at(0).at(0) = scale;
@@ -107,6 +109,7 @@ namespace Matrices
         a.at(1).at(1) = scale;
     }
 
+    //create 2xn matrix assigning all elements at row 0 to xShift and all elements at row 1 to yShift
     TranslationMatrix::TranslationMatrix(double xShift, double yShift, int nCols) : Matrix(2, nCols)
     {
         for (int i = 0; i < 2; i++)
